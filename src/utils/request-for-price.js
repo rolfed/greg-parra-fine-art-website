@@ -53,7 +53,7 @@ export const addRequestForPrice = (function() {
     }
 
     const addRequestPriceAction = () => {
-        const button = document.getElementById('request-price');
+        const button = document.getElementById(REQUEST_FOR_PRICE_ID);
         console.log('Button ', button);
         const click$ = fromEvent(button, 'click').pipe(
             filter(() => !!button),
