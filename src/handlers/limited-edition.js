@@ -1,6 +1,6 @@
-import { requestForPrice } from '@utils'
+import { addRequestForPrice } from '@utils'
 
 export const limitedEditionHandler = () => {
     console.log('*** limited handler ***');
-    requestForPrice();
+    addRequestForPrice();
 };
