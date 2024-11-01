@@ -2,7 +2,10 @@
 
 const path = require('path');
 const glob = require('glob');
+const packageJson = require('./package.json');
+
 const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
+const { DefinePlugin } = require('webpack');
 
 const isProduction = process.env.NODE_ENV == 'production';
 
@@ -28,6 +31,10 @@ const config = {
         path: path.resolve(__dirname, 'dist'),
     },
     plugins: [
+        new DefinePlugin({
+            LIBRARY_VERSION: JSON.stringify(packageJson.version)
+
+        })
         // Add your plugins here
         // Learn more about plugins from https://webpack.js.org/configuration/plugins/
     ],

@@ -1,6 +1,8 @@
 import { limitedEditionHandler } from "@handlers";
 
 (function() {
+    console.log(`Library version: ${LIBRARY_VERSION}`);
+
     const { fromEvent } = rxjs;
     const { map, startWith, filter } = rxjs.operators;
 
