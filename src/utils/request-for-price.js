@@ -34,10 +34,13 @@ export const addRequestForPrice = (function() {
     };
 
     const _createAddToCartButtonInnerDiv = (newButton) => {
+        console.log('button? ', newButton);
         // Create inner text div
         const newButtonInner = document.createElement("div");
         newButtonInner.className = "sqs-add-to-cart-button-inner";
         newButtonInner.textContent = "Request Price";
+
+        console.log('new button ', newButtonInner);
 
         // Append the inner div to the new button
         newButton.appendChild(newButtonInner);
