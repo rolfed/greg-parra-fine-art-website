@@ -1,7 +1,7 @@
 import { 
     limitedEditionHandler ,
     defaultHandler,
-    inquireHandler,
+    inquirePriceHandler,
     openEditionHandler
 } from "@handlers";
 
@@ -19,7 +19,7 @@ const PrintVersion = () => {
     const urlHandlers = {
         '/limited-edition': limitedEditionHandler,
         '/open-edition': openEditionHandler,
-        '/inquire': inquireHandler,
+        '/inquire': inquirePriceHandler,
         'default': defaultHandler,
     };
 

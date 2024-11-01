@@ -1,6 +1,7 @@
 import { requestForPriceForm } from '@utils'
 
-export const limitedEditionHandler = () => {
+export const inquirePriceHandler = () => {
     console.log('*** inquire handler ***');
-    requestForPriceForm();
+
+    requestForPriceForm(); 
 };
