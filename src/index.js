@@ -4,15 +4,21 @@ import {
     openEditionHandler
 } from "@handlers";
 
+import {
+    fromEvent,
+} from 'rxjs';
+
+import {
+map,
+startWith,
+} from 'rxjs/operators'
+
 const PrintVersion = () => {
-    console.log(`*** Greg Parra Fine Art *** \n *** Library version: ${LIBRARY_VERSION} ***`);
+    console.log(`*** Greg Parra Fine Art *** \r *** Library version: ${LIBRARY_VERSION} ***`);
 }
 
 (function() {
     PrintVersion();
-
-    const { fromEvent } = rxjs;
-    const { map, startWith, filter } = rxjs.operators;
 
     /** Handlers Map **/
     const urlHandlers = {
