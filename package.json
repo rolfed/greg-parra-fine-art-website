@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "Library for Greg Parra Fine Arts Website",
   "main": "index.js",
+  "files": [
+        "dist"
+    ],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack --mode=production --node-env=production",
