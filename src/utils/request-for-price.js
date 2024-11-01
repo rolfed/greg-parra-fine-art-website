@@ -78,14 +78,12 @@ export const addRequestForPrice = (function() {
 
         // Extract relevant details (e.g., size and SKU)
         const size = selectedVariant.attributes.Size;
-        const sku = selectedVariant.sku;
 
         // Format for query parameter
         const sizeParam = encodeURIComponent(size);
-        const skuParam = encodeURIComponent(sku);
         _setCanNavigate(true);
 
-        return `size=${sizeParam}&sku=${skuParam}`;
+        return `size=${sizeParam}`;
     }
 
     const addRequestPriceButton = () => {
@@ -101,6 +99,8 @@ export const addRequestForPrice = (function() {
             console.warn(`Button with ID ${REQUEST_FOR_PRICE_ID} not found.`);
             return;
         }
+
+        console.log('can nav ', _canNavigate);
 
         const click$ = fromEvent(button, 'click').pipe(
             filter(() => !!button && _canNavigate),
