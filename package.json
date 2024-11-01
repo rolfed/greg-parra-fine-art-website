@@ -1,6 +1,6 @@
 {
   "name": "greg-parra-fin-art-lib",
-  "version": "v0.0.19",
+  "version": "0.0.20",
   "description": "Library for Greg Parra Fine Arts Website",
   "main": "index.js",
   "files": [
