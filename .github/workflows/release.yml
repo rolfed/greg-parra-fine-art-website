@@ -10,8 +10,7 @@ jobs:
   release:
     runs-on: ubuntu-latest
     permissions:
-      contents: read
-      id-token: write
+      contents: write  # Ensures write access to create releases
 
     steps:
       - name: Checkout Repository
@@ -30,9 +29,8 @@ jobs:
         run: npm run build # Ensure this outputs to the dist directory
 
       - name: Update Dynamic Pre-release Version
-        # if: "!startsWith(github.ref, 'refs/tags/v')"
+        if: "!startsWith(github.ref, 'refs/tags/v')"
         run: |
-          # Create a unique pre-release version using date and short commit SHA
           DATE=$(date +'%Y%m%d%H%M%S')
           SHORT_SHA=$(git rev-parse --short HEAD)
           npm version 0.0.1-next.$DATE.$SHORT_SHA --no-git-tag-version
@@ -45,28 +43,19 @@ jobs:
         run: npm publish --tag next --access public
 
       - name: Increment Version and Publish Final
-        # if: startsWith(github.ref, 'refs/tags/v')  # Run only for final versions
+        if: startsWith(github.ref, 'refs/tags/v')  # Run only for final versions
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
-          # Automatically bump version based on the GitHub tag
           npm version from-git --no-git-tag-version
           npm publish --provenance --access public --tag latest
 
-      # - name: Create GitHub Release
-      #   if: startsWith(github.ref, 'refs/tags/v')  # Only run if a version tag is pushed
-      #   uses: softprops/action-gh-release@v1
-      #   with:
-      #     files: 'dist/**/*'
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
       - name: Create GitHub Release
         if: startsWith(github.ref, 'refs/tags/v')  # Only run if a version tag is pushed
+        uses: actions/github-script@v6
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          files: 'dist/**/*'
           script: |
             const { data: release } = await github.rest.repos.createRelease({
               owner: context.repo.owner,
@@ -76,7 +65,7 @@ jobs:
               body: '',
               draft: false,
               prerelease: false,
-              generate_release_notes: true  // Enables GitHub to auto-summarize changes
+              generate_release_notes: true
             });
             core.setOutput("html_url", release.html_url);
 
