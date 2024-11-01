@@ -2,10 +2,8 @@ name: Release
 
 on: 
   push:
-    branches:
-      - main
-    # tags:
-    #   - 'v*.*.*' # Trigger on version tag, e.g., v1.0.0
+    tags:
+      - 'v*.*.*' # Trigger on version tag, e.g., v1.0.0
   workflow_dispatch:  # Allows manual triggering
 
 jobs:
@@ -27,6 +25,14 @@ jobs:
 
       - name: Install Dependencies
         run: npm ci
+
+        name: Update package.json version
+        uses: adobe/update-prerelease-npm-version@v1.2.0
+        with:
+          pre-release-tag: 'pre'
+        run: cat package.json
+        run: echo ${{ steps.pre-release-version.outputs.pre-release-version }}
+        run: npm publish --tag next
 
       - name: Publish to npm
         env:
