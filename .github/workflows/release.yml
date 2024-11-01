@@ -31,11 +31,9 @@ jobs:
         with:
           pre-release-tag: 'pre'
 
-      # Optional: Show the updated package.json for verification
+      # Show the updated package.json for verification
       - name: Show Updated Version
-      - run: cat package.json
-      - run: echo ${{ steps.pre-release-version.outputs.pre-release-version }}
-      - run: npm publish --tag next
+        run: cat package.json
 
       - name: Publish to npm (next tag)
         env:
