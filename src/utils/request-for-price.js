@@ -53,12 +53,20 @@ export const addRequestForPrice = (function() {
         _appendAddToCartButtonToWrapper(newButton);
     }
 
-    const addRequestPriceAction = () => {
+    const addRequestPriceAction = (title, size) => {
         const button = document.getElementById(REQUEST_FOR_PRICE_ID);
+
+        if (!button) {
+            console.warn(`Button with ID ${REQUEST_FOR_PRICE_ID} not found.`);
+            return;
+        }
 
         const click$ = fromEvent(button, 'click').pipe(
             filter(() => !!button),
-            tap(() => console.log('Request Price clicked')),
+            tap(() => {
+                // Navigate to /inquire URL on button click
+                window.location.href = `/inquire?t=${title}&s=${size}`;
+            })
         );
 
         click$.subscribe();
@@ -66,7 +74,7 @@ export const addRequestForPrice = (function() {
 
     const init = () => {
         addRequestPriceButton();
-        addRequestPriceAction();
+        addRequestPriceAction('test', 'test');
     }
 
     return init();
