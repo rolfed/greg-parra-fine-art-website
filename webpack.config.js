@@ -1,16 +1,29 @@
 // Generated using webpack-cli https://github.com/webpack/webpack-cli
 
 const path = require('path');
+const glob = require('glob');
 const WorkboxWebpackPlugin = require('workbox-webpack-plugin');
 
 const isProduction = process.env.NODE_ENV == 'production';
 
+// Find all subdirectories within src (e.g., src/handlers, src/utils)
+const folders = glob.sync('./src/*/').reduce((entries, folder) => {
+    const folderName = path.basename(folder); // e.g., 'handlers', 'utils'
+    entries[folderName] = `${folder}index.js`; // Use each folder's index.js as entry
+    return entries;
+}, {});
 
 const config = {
-    entry: [
-        './src/index.js',
-        './src/handlers/index.js'
-    ],
+    entry: {
+        main: './src/index.js',
+        ...folders,
+    },
+    resolve: {
+        alias: {
+            '@handlers': path.resolve(__dirname, 'src/handlers'),
+            '@utils': path.resolve(__dirname, 'src/utils'),
+        }
+    },
     output: {
         path: path.resolve(__dirname, 'dist'),
     },
