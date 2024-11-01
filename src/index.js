@@ -1,4 +1,4 @@
-import { limitedEditionHandler } from "./handlers/limited-edition";'./handlers/limited-edition';
+import { limitedEditionHandler } from "./handlers";
 
 (function() {
     const { fromEvent } = rxjs;
