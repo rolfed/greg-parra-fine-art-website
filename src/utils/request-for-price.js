@@ -4,6 +4,7 @@ import { filter, tap } from 'rxjs/operators';
 
 export const addRequestForPrice = (function() {
     const REQUEST_FOR_PRICE_ID = 'request-price';
+    let _canNavigate = false;
 
     const _addToCartAttributes = [
         { key: "role", value: "button" },
@@ -49,6 +50,10 @@ export const addRequestForPrice = (function() {
         return encodeURIComponent(text);
     };
 
+    const _setCanNavigate = (isValid) => {
+        _canNavigate = isValid;
+    }
+
     const _getSize = () => {
         // Select the main product variants container
         const productVariantsElement = document.querySelector(".product-variants");
@@ -56,6 +61,7 @@ export const addRequestForPrice = (function() {
         // Check if the product variants element exists
         if (!productVariantsElement) {
             console.warn("Product variants element not found.");
+            _setCanNavigate(false);
             return null;
         }
 
@@ -63,6 +69,7 @@ export const addRequestForPrice = (function() {
         const selectedVariantData = productVariantsElement.getAttribute("data-selected-variant");
         if (!selectedVariantData) {
             console.warn("No selected variant data found.");
+            _setCanNavigate(false);
             return null;
         }
 
@@ -76,6 +83,7 @@ export const addRequestForPrice = (function() {
         // Format for query parameter
         const sizeParam = encodeURIComponent(size);
         const skuParam = encodeURIComponent(sku);
+        _setCanNavigate(true);
 
         return `size=${sizeParam}&sku=${skuParam}`;
     }
@@ -95,7 +103,7 @@ export const addRequestForPrice = (function() {
         }
 
         const click$ = fromEvent(button, 'click').pipe(
-            filter(() => !!button),
+            filter(() => !!button && _canNavigate),
             tap(() => {
                 // Navigate to /inquire URL on button click
                 window.location.href = `/inquire?t=${title}&s=${size}`;
