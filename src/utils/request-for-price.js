@@ -17,7 +17,7 @@ export const addRequestForPrice = (function () {
     ];
 
     const _removeAddToCartButton = () => {
-        const existingButton = document.querySelector(`#${REQUEST_FOR_PRICE_ID}`);
+        const existingButton = document.querySelector('.sqs-add-to-cart-button');
         if (existingButton) existingButton.remove();
     };
 
