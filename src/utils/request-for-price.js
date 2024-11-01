@@ -1,5 +1,7 @@
 import { getElement, removeElement } from '@utils';
 
+import { fromEvent } from 'rxjs';
+
 export const addRequestPriceButton = () => {
     const addToCartButton = getElement('.sqs-add-to-cart-button');
     removeElement(addToCartButton)

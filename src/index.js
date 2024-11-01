@@ -1,17 +1,11 @@
 import { 
     limitedEditionHandler ,
     defaultHandler,
-    openEditionHandler
+    // openEditionHandler
 } from "@handlers";
 
-import {
-    fromEvent,
-} from 'rxjs';
-
-import {
-map,
-startWith,
-} from 'rxjs/operators'
+import { fromEvent } from 'rxjs';
+import { map, startWith, } from 'rxjs/operators'
 
 const PrintVersion = () => {
     console.log(`*** Greg Parra Fine Art *** \r *** Library version: ${LIBRARY_VERSION} ***`);
