@@ -30,7 +30,7 @@ jobs:
         run: npm run build # Ensure this outputs to the dist directory
 
       - name: Update Dynamic Pre-release Version
-        if: "!startsWith(github.ref, 'refs/tags/v')"
+        # if: "!startsWith(github.ref, 'refs/tags/v')"
         run: |
           # Create a unique pre-release version using date and short commit SHA
           DATE=$(date +'%Y%m%d%H%M%S')
