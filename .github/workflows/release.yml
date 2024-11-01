@@ -42,7 +42,7 @@ jobs:
         if: "!startsWith(github.ref, 'refs/tags/v')" # Run only for pre-release versions
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm publish dist --tag next --access public
+        run: npm publish --tag next --access public
 
       - name: Increment Version and Publish Final
         if: startsWith(github.ref, 'refs/tags/v')  # Run only for final versions
