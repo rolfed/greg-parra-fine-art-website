@@ -102,5 +102,5 @@ export const addRequestForPrice = (function () {
     };
 
     return init();
-})();
+});
 
