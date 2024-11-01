@@ -127,7 +127,9 @@ export const addRequestForPrice = (function() {
     // Call initializeRequestPriceButton once to set up the event listener
     _initializeRequestPriceButton();
 
-    return () => {
+    const init = () => {
         addRequestPriceButton();
     };
+
+    return init();
 });
