@@ -3,7 +3,7 @@ name: Release
 on: 
   push:
     tags:
-      - 'v*.*.*' # Trigger on version tags, e.g., v1.0.0
+      - 'v*.*.*' # Trigger on version tag, e.g., v1.0.0
   workflow_dispatch:  # Allows manual triggering
 
 jobs:
@@ -31,12 +31,10 @@ jobs:
 
       - name: Update Pre-release Version
         if: "!startsWith(github.ref, 'refs/tags/v')"
-        uses: adobe/update-prerelease-npm-version@v1.2.0
-        with:
-          pre-release-tag: 'pre'
-
-      - name: Show Updated Version
-        run: cat package.json
+        run: |
+          # Increment the pre-release version using npm version
+          npm version prerelease --preid=next -m "Automated pre-release version bump to %s"
+          cat package.json  # Show the updated version for verification
 
       - name: Publish Pre-release Version to npm (next tag)
         if: "!startsWith(github.ref, 'refs/tags/v')" # Run only for pre-release versions
