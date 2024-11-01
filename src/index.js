@@ -1,7 +1,8 @@
 import { 
     limitedEditionHandler ,
     defaultHandler,
-    // openEditionHandler
+    inquireHandler,
+    openEditionHandler
 } from "@handlers";
 
 import { fromEvent } from 'rxjs';
@@ -17,7 +18,8 @@ const PrintVersion = () => {
     /** Handlers Map **/
     const urlHandlers = {
         '/limited-edition': limitedEditionHandler,
-        // '/open-edition': openEditionHandler,
+        '/open-edition': openEditionHandler,
+        '/inquire': inquireHandler,
         'default': defaultHandler,
     };
 
