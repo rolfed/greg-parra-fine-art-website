@@ -9,10 +9,6 @@ export const addRequestForPrice = (function() {
         { key: "role", value: "button" },
         { key: "tabindex", value: "0" },
         { key: "data-dynamic-strings", value: "Request For Price" },
-        // { key: "data-collection-id", value: "NEW_COLLECTION_ID" }, // Update with the new collection ID
-        // { key: "data-item-id", value: "NEW_ITEM_ID" }, // Update with the new item ID
-        // { key: "data-product-type", value: "1" },
-        // { key: "data-use-custom-label", value: "false" },
         { key: "data-original-label", value: "Request Price" },
         { key: "id", value: REQUEST_FOR_PRICE_ID }
     ];
@@ -47,6 +43,43 @@ export const addRequestForPrice = (function() {
         }
     }
 
+    const _getTitle = () => {
+        const el = document.querySelector('.ProductItem-details-title')
+        const text = el.textContent.trim() || '';
+        return encodeURIComponent(text);
+    };
+
+    const _getSize = () => {
+        // Select the main product variants container
+        const productVariantsElement = document.querySelector(".product-variants");
+
+        // Check if the product variants element exists
+        if (!productVariantsElement) {
+            console.warn("Product variants element not found.");
+            return null;
+        }
+
+        // Retrieve the JSON data from the data-selected-variant attribute
+        const selectedVariantData = productVariantsElement.getAttribute("data-selected-variant");
+        if (!selectedVariantData) {
+            console.warn("No selected variant data found.");
+            return null;
+        }
+
+        // Parse the JSON data
+        const selectedVariant = JSON.parse(selectedVariantData);
+
+        // Extract relevant details (e.g., size and SKU)
+        const size = selectedVariant.attributes.Size;
+        const sku = selectedVariant.sku;
+
+        // Format for query parameter
+        const sizeParam = encodeURIComponent(size);
+        const skuParam = encodeURIComponent(sku);
+
+        return `size=${sizeParam}&sku=${skuParam}`;
+    }
+
     const addRequestPriceButton = () => {
         _removeAddToCartButton();
         const newButton = _createAddToCartButton();
@@ -74,7 +107,9 @@ export const addRequestForPrice = (function() {
 
     const init = () => {
         addRequestPriceButton();
-        addRequestPriceAction('test', 'test');
+        const title = _getTitle();
+        const size = _getSize();
+        addRequestPriceAction(title, size);
     }
 
     return init();
