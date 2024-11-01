@@ -27,17 +27,21 @@ const PrintVersion = () => {
         handler();
     };
 
+    const pageLoad$ = fromEvent(window, 'load');
+
     const _getCurrentUrl = () => {
         return window.location.href;
     };
 
-    const urlChange$$ = fromEvent(window, 'popstate').pipe(
+    const _urlChange$ = fromEvent(window, 'popstate').pipe(
         startWith(_getCurrentUrl()),
         map(() => _getCurrentUrl()),
         distinctUntilChanged()
     );
 
-    urlChange$$.subscribe(url => {
+    pageLoad$.pipe(
+        concatMap(() => _urlChange$)
+    ).subscribe(url => {
         executeBasedOnUrl(url);
     });
 
