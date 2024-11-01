@@ -5,6 +5,8 @@ import { filter, tap } from 'rxjs/operators';
 export const addRequestForPrice = (function() {
     const REQUEST_FOR_PRICE_ID = 'request-price';
     let _canNavigate = false;
+    let currentTitle = '';
+    let currentSize = '';
 
     const _addToCartAttributes = [
         { key: "role", value: "button" },
@@ -93,6 +95,13 @@ export const addRequestForPrice = (function() {
     }
 
     const addRequestPriceAction = (title, size) => {
+        // Update the title and size variables each time the function is called
+        currentTitle = title;
+        currentSize = size;
+    };
+
+    // Function to initialize the button click listener
+    const _initializeRequestPriceButton = () => {
         const button = document.getElementById(REQUEST_FOR_PRICE_ID);
 
         if (!button) {
@@ -100,24 +109,26 @@ export const addRequestForPrice = (function() {
             return;
         }
 
-        console.log('can nav ', _canNavigate);
-
         const click$ = fromEvent(button, 'click').pipe(
             filter(() => !!button && _canNavigate),
             tap(() => {
+                const title = _getTitle();
+                const size = _getSize();
+                addRequestPriceAction(title, size);
                 // Navigate to /inquire URL on button click
-                window.location.href = `/inquire?t=${title}&s=${size}`;
+                window.location.href = `/inquire?t=${encodeURIComponent(currentTitle)}&s=${encodeURIComponent(currentSize)}`;
             })
         );
 
+
         click$.subscribe();
-    }
+    };
+
+    // Call initializeRequestPriceButton once to set up the event listener
+    _initializeRequestPriceButton();
 
     const init = () => {
         addRequestPriceButton();
-        const title = _getTitle();
-        const size = _getSize();
-        addRequestPriceAction(title, size);
     }
 
     return init();
