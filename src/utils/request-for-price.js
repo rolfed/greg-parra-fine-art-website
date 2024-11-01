@@ -101,6 +101,6 @@ export const addRequestForPrice = (function () {
         addRequestPriceButton();
     };
 
-    return { init };
+    return init();
 })();
 
