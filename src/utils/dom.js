@@ -1,6 +1,5 @@
 export const getElement = (selector) => {
     const element = document.querySelector(selector);
-    console.log('got ', element);
     return element;
 };
 

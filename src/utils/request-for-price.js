@@ -2,13 +2,16 @@ import { getElement, removeElement } from '@utils';
 
 import { fromEvent } from 'rxjs';
 
-export const addRequestPriceButton = () => {
-    const addToCartButton = getElement('.sqs-add-to-cart-button');
-    removeElement(addToCartButton)
-    console.warn('Remove add to cart');
 
-    const buttonWrapper = getElement('.sqs-add-to-cart-button-wrapper');
-    console.log('Button', buttonWrapper);
+const _updateAddToCartButtonText = (el) => {
+ if (el && el.textContent.trim() === "Add To Cart") {
+      buttonText.textContent = "Request Price";
+  }
+}
+
+export const addRequestPriceButton = () => {
+    const buttonText = document.querySelector('.sqs-add-to-cart-button-inner');
+    _updateAddToCartButtonText(buttonText);
 
     // Create a new button element with the same class and role attributes
     // const newButton = document.createElement('div');
