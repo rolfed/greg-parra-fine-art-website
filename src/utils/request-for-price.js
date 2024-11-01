@@ -103,6 +103,7 @@ export const addRequestForPrice = (function() {
     // Function to initialize the button click listener
     const _initializeRequestPriceButton = () => {
         const button = document.getElementById(REQUEST_FOR_PRICE_ID);
+        console.log('button ', button);
 
         if (!button) {
             console.warn(`Button with ID ${REQUEST_FOR_PRICE_ID} not found.`);
@@ -111,7 +112,7 @@ export const addRequestForPrice = (function() {
 
         const click$ = fromEvent(button, 'click').pipe(
             tap(() => console.log('click before', _canNavigate)),
-            filter(() => !!button && _canNavigate),
+            filter(() => (!!button && _canNavigate)),
             tap(() => {
                 console.log('click: ')
                 const title = _getTitle();
