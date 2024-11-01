@@ -34,25 +34,25 @@ export const addRequestForPrice = (function() {
     };
 
     const _createAddToCartButtonInnerDiv = (newButton) => {
-        console.log('button? ', newButton);
-        // Create inner text div
         const newButtonInner = document.createElement("div");
         newButtonInner.className = "sqs-add-to-cart-button-inner";
         newButtonInner.textContent = "Request Price";
 
-        console.log('new button ', newButtonInner);
+        return newButtonInner;
+    }
 
-        // Append the inner div to the new button
-        newButton.appendChild(newButtonInner);
-
-        // Insert the new button into the DOM (update the parent element as needed)
-        document.body.appendChild(newButton); // Change to tar
+    const _appendAddToCartButtonToWrapper = (button) => {
+        const buttonWrapper = document.querySelector(".sqs-add-to-cart-button-wrapper");
+        if (buttonWrapper) {
+            buttonWrapper.append(button);
+        }
     }
 
     const addRequestPriceButton = () => {
-         _removeAddToCartButton();
+        _removeAddToCartButton();
         const newButton = _createAddToCartButton();
-        _createAddToCartButtonInnerDiv(newButton);
+        const addToCartButton = _createAddToCartButtonInnerDiv(newButton);
+        _appendAddToCartButtonToWrapper(addRequestPriceButton);
     }
 
     const addRequestPriceAction = () => {
