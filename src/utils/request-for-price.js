@@ -2,16 +2,18 @@ import { fromEvent } from 'rxjs';
 
 
 export const addRequestForPrice = (function() {
+    const REQUEST_FOR_PRICE_ID = 'request-price';
+
     const _addToCartAttributes = [
         { key: "role", value: "button" },
         { key: "tabindex", value: "0" },
-        { key: "data-dynamic-strings", value: "" },
+        { key: "data-dynamic-strings", value: "Request For Price" },
         { key: "data-collection-id", value: "NEW_COLLECTION_ID" }, // Update with the new collection ID
         { key: "data-item-id", value: "NEW_ITEM_ID" }, // Update with the new item ID
         { key: "data-product-type", value: "1" },
         { key: "data-use-custom-label", value: "false" },
         { key: "data-original-label", value: "Request Price" },
-        { key: "id", value: "new-button-id" }
+        { key: "id", value: REQUEST_FOR_PRICE_ID }
     ];
 
     const _removeAddToCartButton = () => {
