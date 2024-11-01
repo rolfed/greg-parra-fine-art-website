@@ -45,7 +45,7 @@ jobs:
         run: npm publish --tag next --access public
 
       - name: Increment Version and Publish Final
-        if: startsWith(github.ref, 'refs/tags/v')  # Run only for final versions
+        # if: startsWith(github.ref, 'refs/tags/v')  # Run only for final versions
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: |
