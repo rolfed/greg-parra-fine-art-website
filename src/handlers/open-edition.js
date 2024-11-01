@@ -1,4 +1,4 @@
-import { addRequestPriceButton, addRequestPriceAction } from '@utils'
+import { addRequestPriceButton } from '@utils'
 
 export const openEditionHandler = () => {
     console.log('*** open handler ***');
