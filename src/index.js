@@ -13,7 +13,7 @@ import {
     /** Handlers Map **/
     const urlHandlers = {
         '/limited-edition': limitedEditionHandler,
-        '/open-edition': openEditionHandler,
+        // '/open-edition': openEditionHandler,
         'default': defaultHandler,
     };
 
