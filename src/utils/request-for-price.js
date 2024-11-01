@@ -26,8 +26,7 @@ export const addRequestForPrice = (function() {
         const newButton = document.createElement('div');
         newButton.className = "sqs-add-to-cart-button sqs-suppress-edit-mode sqs-button-element--primary";
 
-        _addToCartAttributes.forEach(attr => newButton.setAttributes(attr.key, attr.value));
-
+        _addToCartAttributes.forEach(attr => newButton.setAttribute(attr.key, attr.value));
 
         return newButton;
     };
