@@ -1,4 +1,4 @@
-import { getElement, removeElement } from './@utils';
+import { getElement, removeElement } from '@utils';
 
 export const addRequestPriceButton = () => {
     const addToCartButton = getElement('.sqs-add-to-cart-button');
