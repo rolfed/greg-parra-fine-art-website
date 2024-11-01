@@ -1,5 +1,5 @@
 import { fromEvent } from 'rxjs';
-import { filter } from 'rxjs/operators';
+import { filter, tap } from 'rxjs/operators';
 
 
 export const addRequestForPrice = (function() {
