@@ -8,26 +8,24 @@ on:
 jobs:
   release:
     runs-on: ubuntu-latest
+    permissions:
+      content: read
+      id-token: write
 
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
-      - name: Checkout the repository
-        uses: actions/checkout@v4
-
-      - name: Install Dependencies
-        run: npm install
-
-      - name: Build the library
-        run: npm run build:prod # Ensure your build command is in package.json
-
-      - name: Publish to npm
+      - uses: actions/checkout@v4
+      # Setup .npmrc file to publish to npm
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm ci
+      - run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-        run: npm publish
-
-      - name: Create Github Release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: 'dist/**/*' # Adjust to your output folder
-
-      - name: Post-release cleanup
-        run: echo "Relese complete"
