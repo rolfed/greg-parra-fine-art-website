@@ -11,7 +11,10 @@
     "build": "webpack --mode=production --node-env=production",
     "build:dev": "webpack --mode=development",
     "build:prod": "webpack --mode=production --node-env=production",
-    "watch": "webpack --watch"
+    "watch": "webpack --watch",
+    "release:patch": "npm version patch -m 'Release %s' && git push origin HEAD --tags",
+    "release:minor": "npm version minor -m 'Release %s' && git push origin HEAD --tags",
+    "release:major": "npm version major -m 'Release %s' && git push origin HEAD --tags"
   },
   "keywords": [
     "gregparra",
