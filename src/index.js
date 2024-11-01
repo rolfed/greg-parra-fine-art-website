@@ -5,7 +5,7 @@ import {
 } from "@handlers";
 
 import { fromEvent } from 'rxjs';
-import { map, startWith, distinctUntilChanged } from 'rxjs/operators'
+import { map, startWith, distinctUntilChanged, concatMap } from 'rxjs/operators'
 
 const PrintVersion = () => {
     console.log(`*** Greg Parra Fine Art *** \r *** Library version: ${LIBRARY_VERSION} ***`);
