@@ -30,16 +30,14 @@ export const addRequestForPrice = (function() {
 
         _addToCartAttributes.forEach(attr => newButton.setAttribute(attr.key, attr.value));
 
-        return newButton;
-    };
-
-    const _createAddToCartButtonInnerDiv = (newButton) => {
         const newButtonInner = document.createElement("div");
         newButtonInner.className = "sqs-add-to-cart-button-inner";
         newButtonInner.textContent = "Request Price";
 
-        return newButtonInner;
-    }
+        newButton.append(newButtonInner);
+
+        return newButton;
+    };
 
     const _appendAddToCartButtonToWrapper = (button) => {
         const buttonWrapper = document.querySelector(".sqs-add-to-cart-button-wrapper");
@@ -51,8 +49,7 @@ export const addRequestForPrice = (function() {
     const addRequestPriceButton = () => {
         _removeAddToCartButton();
         const newButton = _createAddToCartButton();
-        const addToCartButton = _createAddToCartButtonInnerDiv(newButton);
-        _appendAddToCartButtonToWrapper(addToCartButton);
+        _appendAddToCartButtonToWrapper(newButton);
     }
 
     const addRequestPriceAction = () => {
