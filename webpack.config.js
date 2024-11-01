@@ -43,6 +43,7 @@ const config = {
             {
                 test: /\.(js|jsx)$/i,
                 loader: 'babel-loader',
+                exclude: '/node_modules',
             },
             {
                 test: /\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,

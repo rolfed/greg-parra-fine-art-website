@@ -4,8 +4,12 @@ import {
     openEditionHandler
 } from "@handlers";
 
+const PrintVersion = () => {
+    console.log(`*** Greg Parra Fine Art *** \n *** Library version: ${LIBRARY_VERSION} ***`);
+}
+
 (function() {
-    console.log(`Library version: ${LIBRARY_VERSION}`);
+    PrintVersion();
 
     const { fromEvent } = rxjs;
     const { map, startWith, filter } = rxjs.operators;
