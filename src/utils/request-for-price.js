@@ -52,7 +52,7 @@ export const addRequestForPrice = (function() {
         _removeAddToCartButton();
         const newButton = _createAddToCartButton();
         const addToCartButton = _createAddToCartButtonInnerDiv(newButton);
-        _appendAddToCartButtonToWrapper(addRequestPriceButton);
+        _appendAddToCartButtonToWrapper(addToCartButton);
     }
 
     const addRequestPriceAction = () => {
