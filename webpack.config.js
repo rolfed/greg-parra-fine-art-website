@@ -29,6 +29,11 @@ const config = {
     },
     output: {
         path: path.resolve(__dirname, 'dist'),
+        // filename: 'gparra-fine-art-lib.js',
+        library: {
+            name: 'MyLibrary',
+            type: 'umd'
+        },
     },
     plugins: [
         new DefinePlugin({
