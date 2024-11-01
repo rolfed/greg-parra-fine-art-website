@@ -11,6 +11,7 @@ const _updateAddToCartButtonText = (el) => {
 
 export const addRequestPriceButton = () => {
     console.log('Add request price button');
+    console.log('test ', document);
 
     const buttonText = document.querySelector('.sqs-add-to-cart-button-inner');
     _updateAddToCartButtonText(buttonText);
