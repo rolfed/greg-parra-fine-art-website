@@ -8,7 +8,7 @@ import { limitedEditionHandler } from "./handlers/limited-edition";'./handlers/l
 
     const getElement = (selector) => {
         const element = document.querySelector(selector);
-        console.warn('got ', element);
+        console.log('got ', element);
         return element;
     };
 
