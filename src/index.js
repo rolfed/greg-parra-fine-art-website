@@ -1,3 +1,5 @@
+import { limitedEditionHandler } from "./handlers/limited-edition";'./handlers/limited-edition';
+
 (function() {
     const { fromEvent } = rxjs;
     const { map, startWith, filter } = rxjs.operators;
@@ -52,12 +54,6 @@
 
         click$.subscribe();
     }
-
-    const limitedEditionHandler = () => {
-        console.log('*** limited handler ***');
-        addRequestPriceButton();
-        addRequestPriceAction();
-    };
 
     const openEditionHandler = () => {
         console.log('*** open handler ***');
