@@ -65,12 +65,6 @@ export const addRequestForPrice = (function () {
         return encodeURIComponent(size);
     };
 
-    const addRequestPriceButton = () => {
-        _removeAddToCartButton();
-        const newButton = _createAddToCartButton();
-        _appendAddToCartButtonToWrapper(newButton);
-        _initializeRequestPriceButton();
-    };
 
     const _navigateToInquire = () => {
         window.location.href = `/inquire?t=${currentTitle}&s=${currentSize}`;
@@ -97,8 +91,15 @@ export const addRequestForPrice = (function () {
         ).subscribe();
     };
 
+    const _addRequestPriceButton = () => {
+        _removeAddToCartButton();
+        const newButton = _createAddToCartButton();
+        _appendAddToCartButtonToWrapper(newButton);
+        _initializeRequestPriceButton();
+    };
+
     const init = () => {
-        addRequestPriceButton();
+        _addRequestPriceButton();
     };
 
     return init();
