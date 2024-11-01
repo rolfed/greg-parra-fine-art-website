@@ -47,25 +47,27 @@
         console.log('Button ', button);
         const click$ = fromEvent(button, 'click').pipe(
             filter(() => !!button),
-            tap(() => console.log('Request Price clicke')),
+            tap(() => console.log('Request Price clicked')),
         );
 
         click$.subscribe();
     }
 
     const limitedEditionHandler = () => {
-        console.log('limited handler');
+        console.log('*** limited handler ***');
         addRequestPriceButton();
         addRequestPriceAction();
     };
 
     const openEditionHandler = () => {
-        console.log('open handler');
+        console.log('*** open handler ***');
+        addRequestPriceButton();
+        addRequestPriceAction();
 
     };
 
     const defaultHandler = () => {
-        console.log('defaul handler');
+        console.log('*** defaul handler ***');
 
     };
 
