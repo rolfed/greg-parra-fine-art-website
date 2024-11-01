@@ -1,7 +1,7 @@
 import { fromEvent } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
 
-export const addRequestForPrice = (function () {
+export const addRequestForPrice = (function() {
     const REQUEST_FOR_PRICE_ID = 'request-price';
     let _canNavigate = false;
     let currentTitle = '';
@@ -25,12 +25,12 @@ export const addRequestForPrice = (function () {
         const newButton = document.createElement('div');
         newButton.className = "sqs-add-to-cart-button sqs-suppress-edit-mode sqs-button-element--primary";
         _addToCartAttributes.forEach(attr => newButton.setAttribute(attr.key, attr.value));
-        
+
         const newButtonInner = document.createElement("div");
         newButtonInner.className = "sqs-add-to-cart-button-inner";
         newButtonInner.textContent = "Request Price";
         newButton.appendChild(newButtonInner);
-        
+
         return newButton;
     };
 
@@ -46,6 +46,28 @@ export const addRequestForPrice = (function () {
 
     const _setCanNavigate = (isValid) => { _canNavigate = isValid; };
 
+    const _createValidationMessage = () => {
+        const message = document.createElement('div');
+        message.className = 'validation-message';
+        message.style.color = 'red';
+        message.style.fontSize = '14px';
+        message.style.marginTop = '8px';
+        message.textContent = 'Please select size';
+        return message;
+    };
+
+    const _displayValidationMessage = () => {
+        const variantOption = document.querySelector('.variant-option');
+        if (variantOption && !document.querySelector('.validation-message')) {
+            variantOption.appendChild(_createValidationMessage());
+        }
+    };
+
+    const _removeValidationMessage = () => {
+        const message = document.querySelector('.validation-message');
+        if (message) message.remove();
+    };
+
     const _getSize = () => {
         const productVariantsElement = document.querySelector(".product-variants");
         if (!productVariantsElement) {
@@ -56,11 +78,13 @@ export const addRequestForPrice = (function () {
         const selectedVariantData = productVariantsElement.getAttribute("data-selected-variant");
         if (!selectedVariantData) {
             _setCanNavigate(false);
+            _displayValidationMessage();  // Display validation message if no size is selected
             return null;
         }
 
         const selectedVariant = JSON.parse(selectedVariantData);
         const size = selectedVariant?.attributes?.Size || '';
+        _removeValidationMessage();  // Remove validation message if a size is selected
         _setCanNavigate(true);
         return encodeURIComponent(size);
     };
@@ -69,6 +93,7 @@ export const addRequestForPrice = (function () {
     const _navigateToInquire = () => {
         window.location.href = `/inquire?t=${currentTitle}&s=${currentSize}`;
     };
+
 
     const _initializeRequestPriceButton = () => {
         const button = document.getElementById(REQUEST_FOR_PRICE_ID);
