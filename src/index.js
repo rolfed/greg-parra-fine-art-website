@@ -23,13 +23,8 @@ const PrintVersion = () => {
 
     const executeBasedOnUrl = (url, handlers) => {
         const matchedHandler = Object.keys(handlers).find(key => url.includes(key));
-
-        if (matchedHandler) {
-            const handler = handlers[matchedHandler];
-            handler();
-        } else {
-            urlHandlers['default']();
-        }
+        const handler = matchedHandler ? handlers[matchedHandler] : handlers['default'];
+        handler();
     };
 
     const _getCurrentUrl = () => {
@@ -38,8 +33,8 @@ const PrintVersion = () => {
 
     const urlChange$$ = fromEvent(window, 'popstate').pipe(
         startWith(_getCurrentUrl()),
-        map(() => _getCurrentUrl())
-
+        map(() => _getCurrentUrl()),
+        distinctUntilChanged()
     );
 
     urlChange$$.subscribe(url => {

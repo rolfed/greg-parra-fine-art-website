@@ -1,4 +1,4 @@
-import { getElement, removeElement } from '@utils';
+// import { getElement, removeElement } from '@utils';
 
 import { fromEvent } from 'rxjs';
 
@@ -10,6 +10,8 @@ const _updateAddToCartButtonText = (el) => {
 }
 
 export const addRequestPriceButton = () => {
+    console.log('Add request price button');
+
     const buttonText = document.querySelector('.sqs-add-to-cart-button-inner');
     _updateAddToCartButtonText(buttonText);
 
