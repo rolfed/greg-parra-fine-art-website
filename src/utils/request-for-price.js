@@ -123,13 +123,14 @@ export const addRequestForPrice = (function() {
             })
         );
 
-        click$.subscribe();
+        return click$;
     };
 
     // Call initializeRequestPriceButton once to set up the event listener
-    _initializeRequestPriceButton();
 
     const init = () => {
+        _initializeRequestPriceButton().subscribe();
+
         addRequestPriceButton();
     };
 
