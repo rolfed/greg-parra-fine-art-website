@@ -110,8 +110,10 @@ export const addRequestForPrice = (function() {
         }
 
         const click$ = fromEvent(button, 'click').pipe(
+            tap(() => console.log('click before')),
             filter(() => !!button && _canNavigate),
             tap(() => {
+                console.log('click: ')
                 const title = _getTitle();
                 const size = _getSize();
                 addRequestPriceAction(title, size);
