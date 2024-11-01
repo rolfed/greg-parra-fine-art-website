@@ -10,11 +10,14 @@
     "build:prod": "webpack --mode=production --node-env=production",
     "watch": "webpack --watch"
   },
-  "keywords": ["gregparra", "dannielrolfe"],
+  "keywords": [
+    "gregparra",
+    "dannielrolfe"
+  ],
   "author": "Danniel Rolfe",
   "repository": {
-      "type": "git",
-      "url": "https://github.com/rolfed/greg-parra-fine-art-website"
+    "type": "git",
+    "url": "git+https://github.com/rolfed/greg-parra-fine-art-website.git"
   },
   "license": "ISC",
   "devDependencies": {
