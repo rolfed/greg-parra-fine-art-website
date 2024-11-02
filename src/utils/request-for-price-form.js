@@ -20,7 +20,7 @@ export const addQueryParamToForm = (function() {
     };
 
     const _insertInputAfter = (newElement, targetElement) => {
-        targetElement.parentNode.insertAjacentElement('afterend', newElement);
+        targetElement.parentNode.parentNode.insertAdjacentElement('afterend', newElement);
     }
 
     const _addTitleAndSizeInputs = () => {
