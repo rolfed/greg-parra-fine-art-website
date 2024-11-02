@@ -23,17 +23,16 @@ export const addQueryParamToForm = (function() {
             return of(null); // Emit null if button or textarea is not found
         }
 
+        const initialText = `Product details \rTitle: ${_title}\rSize: ${_size}`;
+
         const hover$ = fromEvent(button, 'mouseenter').pipe(
             filter(() => button !== null && (!isTextAppended || textarea.value !== initialText)),
             tap(() => {
                 // Append text to the textarea only once
-                const initialText = `Product details \rTitle: ${_title}\rSize: ${_size}`;
                 textarea.value += `\r\r${initialText}`;
 
-                console.log("Button hovered, and textarea updated.");
-
                 // Set the flag to true to prevent further appends
-                isTextAppended = true;
+                isTextAppended = true && textarea.value != initialText;
             })
         );
 
