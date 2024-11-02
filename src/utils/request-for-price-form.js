@@ -20,7 +20,6 @@ export const addQueryParamToForm = (function() {
 
             // Set up a MutationObserver to monitor changes to the textarea
             const observer = new MutationObserver((mutations) => {
-                console.log(mutations);
                 mutations.forEach((mutation) => {
                     if (mutation.type === "attributes" && mutation.attributeName === "value") {
                         // If the value gets cleared, reset it

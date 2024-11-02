@@ -30,7 +30,7 @@ const PrintVersion = () => {
         handler();
     };
 
-    const pageLoad$ = fromEvent(window, 'load');
+    const pageLoad$ = fromEvent(document, 'DOMContentLoaded');
 
     const _getCurrentUrl = () => {
         return window.location.href;
