@@ -21,24 +21,9 @@ export const addQueryParamToForm = (function() {
             textarea.addEventListener("focus", () => {
                 console.log('leave focus');
                 // textarea.blur(); // Immediately removes focus from the textarea
-                const initialText = `Title: ${_title}\nSize: ${_size}`;
-                textarea.value += `\n${initialText}`;
+                const initialText = `Product details \rTitle: ${_title}\rSize: ${_size}`;
+                textarea.value += `\r\r${initialText}`;
             });
-
-            // Set up a MutationObserver to monitor changes to the textarea
-            // const observer = new MutationObserver((mutations) => {
-            //     mutations.forEach((mutation) => {
-            //         if (mutation.type === "attributes" && mutation.attributeName === "value") {
-            //             // If the value gets cleared, reset it
-            //             if (!textarea.value) {
-            //                 textarea.value = initialText;
-            //             }
-            //         }
-            //     });
-            // });
-
-            // Start observing the textarea for attribute changes
-            // observer.observe(textarea, { attributes: true, childList: true, subtree: true });
         }
     }
 
