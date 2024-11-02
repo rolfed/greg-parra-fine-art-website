@@ -11,48 +11,32 @@ export const addQueryParamToForm = (function() {
     const _title = _getQueryParam(_currentUrl, 't');
     const _size = _getQueryParam(_currentUrl, 's');
 
-    const listenForButtonClick$ = () => {
+    const listenForButtonClick$ = (_title, _size) => {
         // Attempt to select the button element
         const button = document.querySelector(".form-submit-button");
-
-        // Create an observable for the button click, or a null observable if the button doesn’t exist
-        const click$ = button
-            ? fromEvent(button, 'click')
-            : of(null); // Emits null if button is not found
-
-        return click$.pipe(
-            // Use filter to ignore null emissions (when button is not found)
-            filter(event => event !== null),
-            take(1),
-            tap(() => console.log('Form button submitted'))
-        );
-    };
-
-    const updateTextArea$ = (_title, _size) => {
-        // Attempt to select the textarea element
+        const form = button?.closest('form'); // Find the closest form element to the button
         const textarea = document.querySelector("#textarea-yui_3_17_2_1_1555014059115_8410-field");
 
-        // If the textarea exists, create an observable, otherwise emit null
-        const textArea$ = textarea
-            ? of(textarea)
-            : of(null);
-
-        return textArea$.pipe(
-            // Filter out null emissions if the textarea doesn't exist
-            filter(textarea => textarea !== null),
-            // Append text to the textarea
-            tap(textarea => {
+        const click$ = fromEvent(button, 'click').pipe(
+            filter(() => button !== null),
+            tap(event => {
+                event.preventDefault();
+                // Update the textarea
                 const initialText = `Product details \rTitle: ${_title}\rSize: ${_size}`;
                 textarea.value += `\r\r${initialText}`;
-            }),
-            take(1)
+
+                console.log("Form submission prevented, and textarea updated.");
+
+                // Submit the form programmatically after updates
+                form.submit();
+            })
+
         );
+
     };
 
     const init = () => {
-        listenForButtonClick$(_title, _size).pipe(
-            switchMap(() => updateTextArea$)
-        ).subscribe();
+        listenForButtonClick$(_title, _size).subscribe();
     }
 
     return init();
