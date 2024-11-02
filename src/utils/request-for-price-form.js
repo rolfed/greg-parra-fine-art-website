@@ -1,3 +1,6 @@
+import { fromEvent, of } from 'rxjs';
+import { filter, take, switchMap } from 'rxjs/operators';
+
 export const addQueryParamToForm = (function() {
 
     const _getQueryParam = (url, param) => {
@@ -8,27 +11,47 @@ export const addQueryParamToForm = (function() {
     const _title = _getQueryParam(_currentUrl, 't');
     const _size = _getQueryParam(_currentUrl, 's');
 
-    const updateTextArea = () => {
-        // Find the textarea element
+    const listenForButtonClick$ = () => {
+        // Attempt to select the button element
+        const button = document.querySelector(".form-submit-button");
+
+        // Create an observable for the button click, or a null observable if the button doesn’t exist
+        const click$ = button
+            ? fromEvent(button, 'click')
+            : of(null); // Emits null if button is not found
+
+        return click$.pipe(
+            // Use filter to ignore null emissions (when button is not found)
+            filter(event => event !== null),
+            take(1)
+        );
+    };
+
+    const updateTextArea$ = (_title, _size) => {
+        // Attempt to select the textarea element
         const textarea = document.querySelector("#textarea-yui_3_17_2_1_1555014059115_8410-field");
 
-        if (textarea) {
-            console.log('found textarea', textarea);
+        // If the textarea exists, create an observable, otherwise emit null
+        const textArea$ = textarea
+            ? of(textarea)
+            : of(null);
 
-            // Set the initial value in the textarea
-
-            // Add an event listener to remove focus when the textarea gains focus
-            textarea.addEventListener("blur", () => {
-                console.log('leave focus');
-                // textarea.blur(); // Immediately removes focus from the textarea
+        return textArea$.pipe(
+            // Filter out null emissions if the textarea doesn't exist
+            filter(textarea => textarea !== null),
+            // Append text to the textarea
+            tap(textarea => {
                 const initialText = `Product details \rTitle: ${_title}\rSize: ${_size}`;
                 textarea.value += `\r\r${initialText}`;
-            });
-        }
-    }
+            }),
+            take(1)
+        );
+    };
 
     const init = () => {
-        updateTextArea(_title, _size)
+        listenForButtonClick$.pipe(
+            switchMap(() => updateTextArea$)
+        ).subscribe();
     }
 
     return init();
