@@ -11,25 +11,19 @@ export const addQueryParamToForm = (function() {
     const _title = _getQueryParam(_currentUrl, 't');
     const _size = _getQueryParam(_currentUrl, 's');
 
-    const listenForButtonClick$ = (_title, _size) => {
+    const listenForButtonFocus$ = (_title, _size) => {
         // Attempt to select the button element
         const button = document.querySelector(".form-submit-button");
-        const form = button?.closest('form'); // Find the closest form element to the button
         const textarea = document.querySelector("#textarea-yui_3_17_2_1_1555014059115_8410-field");
 
-        const click$ = fromEvent(button, 'click').pipe(
+        const click$ = fromEvent(button, 'mouseover').pipe(
             filter(() => button !== null),
             tap(event => {
                 console.log('Event: ', event);
-                event.preventDefault();
                 // Update the textarea
                 const initialText = `Product details \rTitle: ${_title}\rSize: ${_size}`;
                 textarea.value += `\r\r${initialText}`;
-
                 console.log("Form submission prevented, and textarea updated.");
-
-                // Submit the form programmatically after updates
-                form.submit();
             })
 
         );
@@ -38,7 +32,7 @@ export const addQueryParamToForm = (function() {
     };
 
     const init = () => {
-        listenForButtonClick$(_title, _size).subscribe();
+        listenForButtonFocus$(_title, _size).subscribe();
     }
 
     return init();
