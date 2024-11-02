@@ -23,7 +23,8 @@ export const addQueryParamToForm = (function() {
         return click$.pipe(
             // Use filter to ignore null emissions (when button is not found)
             filter(event => event !== null),
-            take(1)
+            take(1),
+            tap(() => console.log('Form button submitted'))
         );
     };
 
@@ -49,7 +50,7 @@ export const addQueryParamToForm = (function() {
     };
 
     const init = () => {
-        listenForButtonClick$.pipe(
+        listenForButtonClick$(_title, _size).pipe(
             switchMap(() => updateTextArea$)
         ).subscribe();
     }
