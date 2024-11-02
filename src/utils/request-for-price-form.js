@@ -14,8 +14,9 @@ export const addQueryParamToForm = (function() {
 
         console.log(textarea);
         if (textarea) {
+            console.log('observer');
             // Set the initial value in the textarea
-            const initialText = `Title: ${title}\nSize: ${size}`;
+            const initialText = `Title: ${_title}\nSize: ${_size}`;
             textarea.value = initialText;
 
             // Set up a MutationObserver to monitor changes to the textarea
