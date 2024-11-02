@@ -18,7 +18,7 @@ export const addQueryParamToForm = (function() {
             // Set the initial value in the textarea
 
             // Add an event listener to remove focus when the textarea gains focus
-            textarea.addEventListener("focus", () => {
+            textarea.addEventListener("blur", () => {
                 console.log('leave focus');
                 // textarea.blur(); // Immediately removes focus from the textarea
                 const initialText = `Product details \rTitle: ${_title}\rSize: ${_size}`;
