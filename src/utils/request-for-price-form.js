@@ -5,7 +5,9 @@ export const addQueryParamToForm = (function() {
         return urlObj.searchParams.get(param); // Get the value of the specified query parameter
     }
     const _currentUrl = window.location.href;
-    const _getParamFromCurrentUrl = _getQueryParam(_currentUrl);
+    console.log('current url', _currentUrl);
+
+    const _getParamFromCurrentUrl = (currentUrl, key) => _getQueryParam(currentUrl, key);
     const _title = _getParamFromCurrentUrl(_currentUrl, 't');
     const _size = _getParamFromCurrentUrl(_currentUrl, 's');
 
