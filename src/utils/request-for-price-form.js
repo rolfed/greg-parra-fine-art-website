@@ -12,6 +12,7 @@ export const addQueryParamToForm = (function() {
         // Find the textarea element
         const textarea = document.querySelector("#textarea-yui_3_17_2_1_1555014059115_8410-field");
 
+        console.log(textarea);
         if (textarea) {
             // Set the initial value in the textarea
             const initialText = `Title: ${title}\nSize: ${size}`;
@@ -23,6 +24,7 @@ export const addQueryParamToForm = (function() {
                     if (mutation.type === "attributes" && mutation.attributeName === "value") {
                         // If the value gets cleared, reset it
                         if (!textarea.value) {
+                            console.log('cleared');
                             textarea.value = initialText;
                         }
                     }
