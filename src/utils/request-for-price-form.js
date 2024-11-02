@@ -8,31 +8,36 @@ export const addQueryParamToForm = (function() {
     const _title = _getQueryParam(_currentUrl, 't');
     const _size = _getQueryParam(_currentUrl, 's');
 
-    const updateTextArea = () => {
-        // Find the textarea element
-        const textarea = document.querySelector("#textarea-yui_3_17_2_1_1555014059115_8410-field");
+const updateTextArea = () => {
+    // Find the textarea element
+    const textarea = document.querySelector("#textarea-yui_3_17_2_1_1555014059115_8410-field");
 
-        if (textarea) {
-            console.log('found textarea', textarea);
-            // Set the initial value in the textarea
-            const initialText = `Title: ${_title}\nSize: ${_size}`;
-            textarea.value = initialText;
+    if (textarea) {
+        console.log('found textarea', textarea);
 
-            // Set up a MutationObserver to monitor changes to the textarea
-            const observer = new MutationObserver((mutations) => {
-                mutations.forEach((mutation) => {
-                    if (mutation.type === "attributes" && mutation.attributeName === "value") {
-                        // If the value gets cleared, reset it
-                        if (!textarea.value) {
-                            textarea.value = initialText;
-                        }
+        // Set the initial value in the textarea
+        const initialText = `Title: ${_title}\nSize: ${_size}`;
+        textarea.value = initialText;
+
+        // Add an event listener to remove focus when the textarea gains focus
+        textarea.addEventListener("focus", () => {
+            textarea.blur(); // Immediately removes focus from the textarea
+        });
+
+        // Set up a MutationObserver to monitor changes to the textarea
+        const observer = new MutationObserver((mutations) => {
+            mutations.forEach((mutation) => {
+                if (mutation.type === "attributes" && mutation.attributeName === "value") {
+                    // If the value gets cleared, reset it
+                    if (!textarea.value) {
+                        textarea.value = initialText;
                     }
-                });
+                }
             });
+        });
 
-            // Start observing the textarea for attribute changes
-            observer.observe(textarea, { attributes: true, childList: true, subtree: true });
-        }
+        // Start observing the textarea for attribute changes
+        observer.observe(textarea, { attributes: true, childList: true, subtree: true });
     }
 
     const init = () => {
