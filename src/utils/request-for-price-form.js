@@ -11,24 +11,33 @@ export const addQueryParamToForm = (function() {
     const _title = _getQueryParam(_currentUrl, 't');
     const _size = _getQueryParam(_currentUrl, 's');
 
-    const listenForButtonFocus$ = (_title, _size) => {
-        // Attempt to select the button element
+    const listenForButtonHover = (_title, _size) => {
         const button = document.querySelector(".form-submit-button");
         const textarea = document.querySelector("#textarea-yui_3_17_2_1_1555014059115_8410-field");
 
-        const click$ = fromEvent(button, 'mouseover').pipe(
-            filter(() => button !== null),
-            tap(event => {
-                console.log('Event: ', event);
-                // Update the textarea
+        // Flag to prevent multiple appends
+        let isTextAppended = false;
+
+        if (!button || !textarea) {
+            console.warn("Button or textarea not found.");
+            return of(null); // Emit null if button or textarea is not found
+        }
+
+        const hover$ = fromEvent(button, 'mouseenter').pipe(
+            filter(() => button !== null && !isTextAppended), // Ensure button exists and text hasn’t been appended
+            tap(() => {
+                // Append text to the textarea only once
                 const initialText = `Product details \rTitle: ${_title}\rSize: ${_size}`;
                 textarea.value += `\r\r${initialText}`;
-                console.log("Form submission prevented, and textarea updated.");
-            })
 
+                console.log("Button hovered, and textarea updated.");
+
+                // Set the flag to true to prevent further appends
+                isTextAppended = true;
+            })
         );
 
-        return click$;
+        return hover$;
     };
 
     const init = () => {
