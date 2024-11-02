@@ -1,7 +1,7 @@
-import { requestForPriceForm } from '@utils'
+import { addQueryParamToForm } from '@utils'
 
 export const inquirePriceHandler = () => {
     console.log('*** inquire handler ***');
 
-    requestForPriceForm(); 
+    addQueryParamToForm(); 
 };
