@@ -1,5 +1,5 @@
-import { fromEvent, of } from 'rxjs';
-import { filter, take, switchMap } from 'rxjs/operators';
+import { fromEvent } from 'rxjs';
+import { filter, tap } from 'rxjs/operators';
 
 export const addQueryParamToForm = (function() {
 
