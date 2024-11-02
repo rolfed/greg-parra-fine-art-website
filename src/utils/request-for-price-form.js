@@ -1,4 +1,5 @@
 export const addQueryParamToForm = (function() {
+
     const _getQueryParam = (url, param) => {
         const urlObj = new URL(url); // Create a URL object
         return urlObj.searchParams.get(param); // Get the value of the specified query parameter
@@ -10,6 +11,7 @@ export const addQueryParamToForm = (function() {
 
     const updateTextArea = (title, size) => {
         const textarea = document.querySelector("#textarea-yui_3_17_2_1_1555014059115_8410-field");
+        console.log('text area ', textarea);
 
         // Check if the textarea exists
         if (textarea) {
