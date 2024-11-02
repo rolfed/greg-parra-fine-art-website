@@ -20,6 +20,7 @@ export const addQueryParamToForm = (function() {
         const click$ = fromEvent(button, 'click').pipe(
             filter(() => button !== null),
             tap(event => {
+                console.log('Event: ', event);
                 event.preventDefault();
                 // Update the textarea
                 const initialText = `Product details \rTitle: ${_title}\rSize: ${_size}`;
