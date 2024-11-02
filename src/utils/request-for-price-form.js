@@ -18,6 +18,7 @@ export const addQueryParamToForm = (function() {
 
         const click$ = fromEvent(button, 'mouseover').pipe(
             filter(() => button !== null),
+            take(1),
             tap(event => {
                 console.log('Event: ', event);
                 // Update the textarea
