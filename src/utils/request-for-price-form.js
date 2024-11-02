@@ -11,7 +11,7 @@ export const addQueryParamToForm = (function() {
     const _title = _getQueryParam(_currentUrl, 't');
     const _size = _getQueryParam(_currentUrl, 's');
 
-    const listenForButtonHover = (_title, _size) => {
+    const listenForButtonHover$ = (_title, _size) => {
         const button = document.querySelector(".form-submit-button");
         const textarea = document.querySelector("#textarea-yui_3_17_2_1_1555014059115_8410-field");
 
@@ -41,7 +41,7 @@ export const addQueryParamToForm = (function() {
     };
 
     const init = () => {
-        listenForButtonFocus$(_title, _size).subscribe();
+        listenForButtonHover$(_title, _size).subscribe();
     }
 
     return init();
