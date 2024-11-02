@@ -21,6 +21,7 @@ export const addQueryParamToForm = (function() {
 
             // Add an event listener to remove focus when the textarea gains focus
             textarea.addEventListener("focus", () => {
+                console.log('leave focus');
                 textarea.blur(); // Immediately removes focus from the textarea
             });
 
