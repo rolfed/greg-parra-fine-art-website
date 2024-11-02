@@ -23,6 +23,7 @@ export const addQueryParamToForm = (function() {
             const observer = new MutationObserver((mutations) => {
                 mutations.forEach((mutation) => {
                     if (mutation.type === "attributes" && mutation.attributeName === "value") {
+                            console.log('change');
                         // If the value gets cleared, reset it
                         if (!textarea.value) {
                             console.log('cleared');
