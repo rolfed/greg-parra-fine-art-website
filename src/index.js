@@ -25,7 +25,6 @@ const PrintVersion = () => {
 
     const executeBasedOnUrl = (url, handlers) => {
         const matchedHandler = Object.keys(handlers).find(key => url.includes(key));
-        console.log('handlers ', handlers);
         const handler = matchedHandler ? handlers[matchedHandler] : handlers['default'];
         handler();
     };
