@@ -9,16 +9,28 @@ export const addQueryParamToForm = (function() {
     const _size = _getQueryParam(_currentUrl, 's');
 
     const updateTextArea = (title, size) => {
+        // Find the textarea element
         const textarea = document.querySelector("#textarea-yui_3_17_2_1_1555014059115_8410-field");
 
-        // Check if the textarea exists
         if (textarea) {
-            // Format the message to display in the textarea
-            const message = `Title: ${_title}\nSize: ${_size}`;
+            // Set the initial value in the textarea
+            const initialText = `Title: ${title}\nSize: ${size}`;
+            textarea.value = initialText;
 
-            // Set the message and disable the textarea
-            textarea.value = message;
-            // textarea.disabled = true;
+            // Set up a MutationObserver to monitor changes to the textarea
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.type === "attributes" && mutation.attributeName === "value") {
+                        // If the value gets cleared, reset it
+                        if (!textarea.value) {
+                            textarea.value = initialText;
+                        }
+                    }
+                });
+            });
+
+            // Start observing the textarea for attribute changes
+            observer.observe(textarea, { attributes: true, childList: true, subtree: true });
         }
     }
 
