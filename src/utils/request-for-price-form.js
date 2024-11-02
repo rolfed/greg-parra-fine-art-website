@@ -33,6 +33,7 @@ export const addQueryParamToForm = (function() {
 
         );
 
+        return click$;
     };
 
     const init = () => {
