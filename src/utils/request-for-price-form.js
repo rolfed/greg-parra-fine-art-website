@@ -16,29 +16,29 @@ export const addQueryParamToForm = (function() {
             console.log('found textarea', textarea);
 
             // Set the initial value in the textarea
-            const initialText = `Title: ${_title}\nSize: ${_size}`;
-            textarea.value = initialText;
 
             // Add an event listener to remove focus when the textarea gains focus
             textarea.addEventListener("focus", () => {
                 console.log('leave focus');
-                textarea.blur(); // Immediately removes focus from the textarea
+                // textarea.blur(); // Immediately removes focus from the textarea
+                const initialText = `Title: ${_title}\nSize: ${_size}`;
+                textarea.value += `\n${initialText}`;
             });
 
             // Set up a MutationObserver to monitor changes to the textarea
-            const observer = new MutationObserver((mutations) => {
-                mutations.forEach((mutation) => {
-                    if (mutation.type === "attributes" && mutation.attributeName === "value") {
-                        // If the value gets cleared, reset it
-                        if (!textarea.value) {
-                            textarea.value = initialText;
-                        }
-                    }
-                });
-            });
+            // const observer = new MutationObserver((mutations) => {
+            //     mutations.forEach((mutation) => {
+            //         if (mutation.type === "attributes" && mutation.attributeName === "value") {
+            //             // If the value gets cleared, reset it
+            //             if (!textarea.value) {
+            //                 textarea.value = initialText;
+            //             }
+            //         }
+            //     });
+            // });
 
             // Start observing the textarea for attribute changes
-            observer.observe(textarea, { attributes: true, childList: true, subtree: true });
+            // observer.observe(textarea, { attributes: true, childList: true, subtree: true });
         }
     }
 
